@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BhejaFry - Cute Clothing Store</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", "Segoe UI", cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+      color: #444;
+    }
+    header {
+      background: #ffb3d9;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      border-bottom: 4px solid #ff80bf;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px #ff80bf;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 18px;
+    }
+    nav {
+      background: #ffe6f0;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 2px dashed #ff99cc;
+    }
+    nav a {
+      color: #ff3399;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+    }
+    nav a::after {
+      content: "♡";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    nav a:hover::after {
+      opacity: 1;
+    }
+    section {
+      padding: 30px 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+      color: #ff3399;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+    }
+    .product {
+      background: #fff;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .product h3 {
+      margin: 12px 0 5px;
+      color: #ff3399;
+    }
+    .product p {
+      margin: 5px 0;
+      font-weight: bold;
+      color: #3399ff;
+      font-size: 18px;
+    }
+    .qty-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 12px;
+      gap: 10px;
+    }
+    .qty-controls button {
+      background: #ff99cc;
+      border: none;
+      color: white;
+      font-size: 20px;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    .qty-controls button:hover {
+      background: #ff66b2;
+    }
+    .qty {
+      width: 45px;
+      text-align: center;
+      font-size: 16px;
+      border: 2px solid #ff99cc;
+      border-radius: 10px;
+      padding: 6px;
+      background: #fff0f6;
+    }
+    .btn {
+      display: block;
+      margin: 35px auto;
+      background: #ff80bf;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      cursor: pointer;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background 0.3s;
+    }
+    .btn:hover {
+      background: #ff3399;
+      transform: scale(1.05);
+    }
+    #bill {
+      text-align: center;
+      font-size: 22px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff3399;
+    }
+    footer {
+      background: #ffb3d9;
+      color: white;
+      text-align: center;
+      padding: 18px;
+      margin-top: 40px;
+      font-size: 15px;
+      border-top: 4px solid #ff80bf;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧸 BhejaFry 🍭</h1>
+    <p>Your Sweet & Cute Clothing Store</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Shop</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="products">
+    <h2>✨ Our Cute Collection ✨</h2>
+
+    <div class="products">
+      <div class="product">
+        <img src="jeans.jpg" alt="Jeans">
+        <h3>Denim Jeans 👖</h3>
+        <p>₹1800</p>
+        <div class="qty-controls">
+          <button onclick="updateQty(0,-1)">-</button>
+          <input type="text" class="qty" value="0" readonly>
+          <button onclick="updateQty(0,1)">+</button>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="tshirt.jpg" alt="Shirt">
+        <h3>Casual Shirt 👕</h3>
+        <p>₹1200</p>
+        <div class="qty-controls">
+          <button onclick="updateQty(1,-1)">-</button>
+          <input type="text" class="qty" value="0" readonly>
+          <button onclick="updateQty(1,1)">+</button>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="shoee.jpg" alt="Shoes">
+        <h3>Sports Shoes 👟</h3>
+        <p>₹2000</p>
+        <div class="qty-controls">
+          <button onclick="updateQty(2,-1)">-</button>
+          <input type="text" class="qty" value="0" readonly>
+          <button onclick="updateQty(2,1)">+</button>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="leather.jpg" alt="Jacket">
+        <h3>Leather Jacket 🧥</h3>
+        <p>₹2500</p>
+        <div class="qty-controls">
+          <button onclick="updateQty(3,-1)">-</button>
+          <input type="text" class="qty" value="0" readonly>
+          <button onclick="updateQty(3,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculateBill()">🛒 Show My Bill</button>
+    <h3 id="bill">Total Bill: ₹0</h3>
+  </section>
+
+  <footer>
+    <p>🌸 &copy; 2025 BhejaFry | Contact: support@BhejaFry.com 🌸</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    window.onload = function () {
+      alert("💖 Welcome to BhejaFry! Let's shop something cute 🧸✨");
+    };
+
+    let prices = [1800, 1200, 2000, 2500]; // Jeans, Shirt, Shoes, Jacket
+
+    function updateQty(index, change) {
+      let qtyField = document.getElementsByClassName("qty")[index];
+      let current = parseInt(qtyField.value);
+      let newQty = current + change;
+      if (newQty < 0) newQty = 0;
+      qtyField.value = newQty;
+    }
+
+    function calculateBill() {
+      let quantities = document.getElementsByClassName("qty");
+      let total = 0;
+
+      for (let i = 0; i < prices.length; i++) {
+        total += prices[i] * quantities[i].value;
+      }
+
+      document.getElementById("bill").innerText = "💝 Total Bill: ₹" + total + " 💝";
+    }
+  </script>
+</body>
+</html>
