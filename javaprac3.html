@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade Grade Calculator</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: #0f0f0f;
+      color: #00ffcc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    h1 {
+      color: #ffcc00;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff6600, 0 0 20px #ff3300;
+    }
+
+    .game-box {
+      background: #1a1a1a;
+      border: 4px solid #00ffcc;
+      border-radius: 12px;
+      padding: 20px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      background: #000;
+      color: #00ffcc;
+    }
+
+    button {
+      background: #ff0066;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      width: 100%;
+      font-family: 'Press Start 2P', cursive;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff0066;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff3399;
+      transform: scale(1.05);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 25px;
+      background: #333;
+      border-radius: 8px;
+      margin: 15px 0;
+      overflow: hidden;
+      border: 2px solid #00ffcc;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(to right, #00ffcc, #00ff88);
+      transition: width 1s ease-in-out;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 14px;
+      display: none;
+      text-shadow: 0 0 5px #00ffcc;
+    }
+
+    .character {
+      font-size: 40px;
+      margin-top: 15px;
+      display: none;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Arcade Grade Machine 🎮</h1>
+  <div class="game-box">
+    <input type="number" id="marks" placeholder="Enter Marks (0-100)">
+    <button onclick="playGame()">Check Grade</button>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+    
+    <p id="result"></p>
+    <div class="character" id="character"></div>
+    <button onclick="resetGame()" style="margin-top:10px; display:none;" id="resetBtn">🔄 Try Again</button>
+  </div>
+
+  <script>
+    function playGame() {
+      const marks = parseFloat(document.getElementById("marks").value);
+      const resultEl = document.getElementById("result");
+      const progress = document.getElementById("progress");
+      const character = document.getElementById("character");
+      const resetBtn = document.getElementById("resetBtn");
+
+      if (isNaN(marks) || marks < 0 || marks > 100) {
+        resultEl.textContent = "⚠ Invalid Marks!";
+        resultEl.style.display = "block";
+        progress.style.width = "0";
+        character.style.display = "none";
+        return;
+      }
+
+      progress.style.width = marks + "%";
+      resultEl.style.display = "block";
+      character.style.display = "block";
+      resetBtn.style.display = "block";
+
+      if (marks < 50) {
+        resultEl.textContent = "❌ FAIL – Try Harder!";
+        character.textContent = "😢";
+      } else if (marks <= 65) {
+        resultEl.textContent = "Grade C – Keep Pushing!";
+        character.textContent = "🙂";
+      } else if (marks <= 80) {
+        resultEl.textContent = "Grade B – Nice Work!";
+        character.textContent = "😎";
+      } else if (marks <= 90) {
+        resultEl.textContent = "Grade A – Great Job!";
+        character.textContent = "🤩";
+      } else {
+        resultEl.textContent = "Grade A+ – OUTSTANDING!";
+        character.textContent = "🏆";
+      }
+    }
+
+    function resetGame() {
+      document.getElementById("marks").value = "";
+      document.getElementById("result").style.display = "none";
+      document.getElementById("progress").style.width = "0";
+      document.getElementById("character").style.display = "none";
+      document.getElementById("resetBtn").style.display = "none";
+    }
+  </script>
+</body>
+</html>
